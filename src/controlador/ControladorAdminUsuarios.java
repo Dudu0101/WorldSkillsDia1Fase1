@@ -39,12 +39,13 @@ public class ControladorAdminUsuarios implements ActionListener, MouseListener {
 
     DefaultComboBoxModel roles = new DefaultComboBoxModel();
 
-    //Variable para comprobar el error en la fila seleccionada
+    //Variable para comprobar que rol contiene el usuario
     public static int rol = 0;
-    
-    //Variable para asignar el si esta activo o inactivo
+
+    //Variable para asignar si esta activo o inactivo
     public static String estadoMod;
 
+    //Variable para asignar el estado de forma String a la tabla
     private String estado;
 
     public ControladorAdminUsuarios(JfrmAdminUsuarios admin) {
@@ -81,20 +82,32 @@ public class ControladorAdminUsuarios implements ActionListener, MouseListener {
         if (e.getSource() == admin.jCmbRoles) {
             admin.jBtnCambiarEstado.setEnabled(false);
             admin.jBtnCambiarRol.setEnabled(false);
+
+            //Ejecutamos el metodo para buscar los datos por medio de un rol
             buscarporRol();
         }
 
-        if (e.getSource() == admin.jBtnCambiarEstado) {            
+        //Boton para cambiar el estado
+        if (e.getSource() == admin.jBtnCambiarEstado) {
+
+            //Se inicializa el formulario a uno nuevo
             modEstado = new JfrmEstado();
+
+            //Asignamos datos a las cajas de texto
             asignarDatosHabilitar();
-            controladorEstado= new ControladorModEstado(modEstado);
+            controladorEstado = new ControladorModEstado(modEstado);
             modEstado.setVisible(true);
             modEstado.setLocationRelativeTo(null);
             admin.setEnabled(false);
         }
 
-        if (e.getSource() == admin.jBtnCambiarRol) {            
+        //Boton para cambiar el rol
+        if (e.getSource() == admin.jBtnCambiarRol) {
+
+            //Se inicializa el formulario a uno nuevo
             modRol = new JfrmModRol();
+
+            //Asignamos datos a las cajas de texto
             asignarDatosRol();
             controladorRol = new ControladorModRol(modRol);
             modRol.setVisible(true);
@@ -105,8 +118,13 @@ public class ControladorAdminUsuarios implements ActionListener, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        admin.jBtnCambiarEstado.setEnabled(true);
-        admin.jBtnCambiarRol.setEnabled(true);
+
+        if (e.getSource() == admin.jTblUsuarios) {
+
+            //Habilitamos los botones
+            admin.jBtnCambiarEstado.setEnabled(true);
+            admin.jBtnCambiarRol.setEnabled(true);
+        }
 
         //Se abre el formulario  para agregar usuarios
         if (e.getSource() == admin.jLblAddUsuario) {
@@ -157,6 +175,7 @@ public class ControladorAdminUsuarios implements ActionListener, MouseListener {
         }
     }
 
+    //Metodo para limpiar la tabla y/o actualizarla a nuevos datos
     public void limpiarTabla() {
         int a = tabla.getRowCount() - 1;
         for (int i = a; i >= 0; i--) {
@@ -185,7 +204,11 @@ public class ControladorAdminUsuarios implements ActionListener, MouseListener {
         }
 
         admin.jTblUsuarios.setModel(tabla);
+
+        //Instanciamos la clase para pintar las filas
         ColoresTabla colores = new ColoresTabla();
+
+        //Le asignamos la columna y la instancia del objeto 
         admin.jTblUsuarios.setDefaultRenderer(admin.jTblUsuarios.getColumnClass(0), colores);
         tamanios();
     }
@@ -238,25 +261,30 @@ public class ControladorAdminUsuarios implements ActionListener, MouseListener {
 
     }
 
+    //Asignamos datos al frame para cambiar el estado
     public void asignarDatosHabilitar() {
         modEstado.jTxtNameMod.setText(String.valueOf(admin.jTblUsuarios.getValueAt(admin.jTblUsuarios.getSelectedRow(), 1)));
         modEstado.jTxtApellidoMod.setText(String.valueOf(admin.jTblUsuarios.getValueAt(admin.jTblUsuarios.getSelectedRow(), 2)));
         modEstado.jTxtCorreoMod.setText(String.valueOf(admin.jTblUsuarios.getValueAt(admin.jTblUsuarios.getSelectedRow(), 4)));
         modEstado.jTxtTelMOd.setText(String.valueOf(admin.jTblUsuarios.getValueAt(admin.jTblUsuarios.getSelectedRow(), 5)));
         modEstado.jTxtEstado.setText(String.valueOf(admin.jTblUsuarios.getValueAt(admin.jTblUsuarios.getSelectedRow(), 6)));
-        estadoMod= String.valueOf(admin.jTblUsuarios.getValueAt(admin.jTblUsuarios.getSelectedRow(), 6));
+        estadoMod = String.valueOf(admin.jTblUsuarios.getValueAt(admin.jTblUsuarios.getSelectedRow(), 6));
     }
 
+    //Metodo para asignar datos al frame para cambiar el Rol
     public void asignarDatosRol() {
         modRol.jTxtNameRol.setText(String.valueOf(String.valueOf(admin.jTblUsuarios.getValueAt(admin.jTblUsuarios.getSelectedRow(), 1))));
         modRol.jTxtApellidRol.setText(String.valueOf(String.valueOf(admin.jTblUsuarios.getValueAt(admin.jTblUsuarios.getSelectedRow(), 2))));
         modRol.jTxtCorreoRol.setText(String.valueOf(String.valueOf(admin.jTblUsuarios.getValueAt(admin.jTblUsuarios.getSelectedRow(), 4))));
         modRol.jTxtTelRol.setText(String.valueOf(String.valueOf(admin.jTblUsuarios.getValueAt(admin.jTblUsuarios.getSelectedRow(), 5))));
 
+        //Si equivale a administrador dejamos seleccionado el radio button de administrador
         if (admin.jTblUsuarios.getValueAt(admin.jTblUsuarios.getSelectedRow(), 3).equals("Administrador")) {
             modRol.jRbtnAdmin.setSelected(true);
             rol = 1;
         } else {
+
+            //En caso contrario se deja seleccionado el rabio button de Recepcionista
             modRol.jRbtnRecepci.setSelected(true);
             rol = 2;
         }

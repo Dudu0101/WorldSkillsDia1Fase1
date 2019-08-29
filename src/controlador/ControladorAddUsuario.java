@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controlador;
 
 import dao.UsuariosDao;
@@ -57,8 +53,14 @@ public class ControladorAddUsuario implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addUser.jBtnGuardarAdd) {
+            
+            //Validamos si existen campos vacios para luego 
             validarCamposVacios();
+            
+            //si no existen realizar el proceso
             agregarUsuarios();
+            
+            //Iniciamos el controlador princpal
             controlador = new ControladorAdminUsuarios(admin);
             addUser.dispose();
             admin.setEnabled(true);
@@ -78,7 +80,7 @@ public class ControladorAddUsuario implements ActionListener {
         //Comprobar Campo nombre
         if (addUser.jTxtNameAdd.getText().isEmpty()) {
 
-            //Coloreamos el borde de color verde en caso esté lleno
+            //Coloreamos el borde de color rojo en caso esté vacio
             addUser.jTxtNameAdd.setBorder(new EtchedBorder(Color.RED, null));
             contarErroneas++;
         } else {
@@ -102,7 +104,7 @@ public class ControladorAddUsuario implements ActionListener {
         //Comprobar Campo telefono
         if (addUser.jTxtTelAdd.getText().isEmpty()) {
 
-            //Coloreamos el borde de color verde en caso esté lleno
+            //Coloreamos el borde de color rojo en caso esté vaio
             addUser.jTxtTelAdd.setBorder(new EtchedBorder(Color.RED, null));
             contarErroneas++;
         } else {
@@ -114,7 +116,7 @@ public class ControladorAddUsuario implements ActionListener {
         //Comprobamos Campo Direccion
         if (addUser.jTxtDireccionAdd.getText().isEmpty()) {
 
-            //Coloreamos el borde de color verde en caso esté lleno
+            //Coloreamos el borde de color rojo en caso esté vaio
             addUser.jTxtDireccionAdd.setBorder(new EtchedBorder(Color.RED, null));
             contarErroneas++;
         } else {
@@ -126,7 +128,7 @@ public class ControladorAddUsuario implements ActionListener {
         //Comprobamos campo Correo
         if (addUser.jTxtCorreoAdd.getText().isEmpty()) {
 
-            //Coloreamos el borde de color verde en caso esté lleno
+            //Coloreamos el borde de color rojo en caso esté vaio
             addUser.jTxtCorreoAdd.setBorder(new EtchedBorder(Color.RED, null));
             contarErroneas++;
 
@@ -147,7 +149,7 @@ public class ControladorAddUsuario implements ActionListener {
         //Verificamos Fecha Nacimiento 
         if (addUser.jFtxtFechaAdd.getText().contains(" ")) {
 
-            //Coloreamos el borde de color verde en caso esté lleno
+            //Coloreamos el borde de color rojo en caso esté vaio
             addUser.jFtxtFechaAdd.setBorder(new EtchedBorder(Color.RED, null));
             contarErroneas++;
         } else {
@@ -159,7 +161,7 @@ public class ControladorAddUsuario implements ActionListener {
         //Verificamos campo Contrasenia
         if (addUser.jTxtContrasenia.getText().isEmpty()) {
 
-            //Coloreamos el borde de color verde en caso esté lleno
+            //Coloreamos el borde de color rojo en caso esté vaio
             addUser.jTxtContrasenia.setBorder(new EtchedBorder(Color.RED, null));
             contarErroneas++;
         } else {

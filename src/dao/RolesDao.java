@@ -10,14 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import modelo.Roles;
 
-/**
- *
- * @author javam2019
- */
 public class RolesDao implements RolesInterface {
 
     PreparedStatement ejecutar;

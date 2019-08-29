@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
 
 import java.awt.Color;
@@ -10,10 +5,6 @@ import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-/**
- *
- * @author javam2019
- */
 public class ColoresTabla extends DefaultTableCellRenderer {
 
     @Override
@@ -25,9 +16,14 @@ public class ColoresTabla extends DefaultTableCellRenderer {
 
         this.setOpaque(true);
 
+        //Evaluamos si el valor de la columna equivale a activo o a inactivo
         if (table.getValueAt(row, 6).toString().equals("Inactivo")) {
+            
+            //Pintamos de color Rojo claro 
             this.setBackground(new java.awt.Color(192, 57, 43));
         } else if (table.getValueAt(row, 3).toString().equals("Administrador")) {
+            
+            //Pintamos de color rojo claro
             this.setBackground(new java.awt.Color(133, 193, 233));
         } else {
             this.setBackground(Color.white);

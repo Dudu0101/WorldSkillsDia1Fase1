@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
 
 import static controlador.ControladorAdminUsuarios.admin;
@@ -52,15 +47,15 @@ public class ControladorModRol implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        
+        //Metodo para habilitar al seleccionar una opcion que no sea la ya establecida
         habilitarBoton();
         if (e.getSource() == mod.jRbtnAdmin) {
             mod.jBtnCambiarRol.setEnabled(true);
-            System.out.println("Admin");
         }
 
         if (e.getSource() == mod.jRbtnRecepci) {
             mod.jBtnCambiarRol.setEnabled(true);
-            System.out.println("Recep");
         }
 
         if (e.getSource() == mod.jBtnCambiarRol) {
@@ -77,18 +72,28 @@ public class ControladorModRol implements ActionListener {
             admin.toFront();
 
         }
+        
+        //Metodo para habilitar al seleccionar una opcion que no sea la ya establecida
         habilitarBoton();
 
     }
 
+    //Metodo para habilitar al seleccionar una opcion que no sea la ya establecida
     public void habilitarBoton() {
+        
+        //Si la variable estatica del frame principal es igual a 1 osea es Administrador
         if (rol == 1) {
+            
+            //Añadimos action listener al radio button de recepcionista
             mod.jRbtnRecepci.addActionListener(this);
         } else if (rol == 2) {
+            
+            //De lo contrario se lo agregamos al radio button de administrador
             mod.jRbtnAdmin.addActionListener(this);
         }
     }
 
+    //metodo para modificar rol
     public void modificarRol() {
         users.setCorreo(String.valueOf(mod.jTxtCorreoRol.getText()));
         if (mod.jRbtnRecepci.isSelected()) {

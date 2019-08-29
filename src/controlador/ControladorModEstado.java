@@ -36,6 +36,7 @@ public class ControladorModEstado implements ActionListener {
         estado.jRbtnHabilitar.addActionListener(this);
     }
 
+    //Añadir no editable a los textFields
     public void setTextFieldEditable() {
         estado.jTxtNameMod.setEditable(false);
         estado.jTxtApellidoMod.setEditable(false);
@@ -46,17 +47,25 @@ public class ControladorModEstado implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        
+        //Habilitar el boton Guardar Cambios a seleccionar uno de los radiobuttons
         estado.jBtnCambiarEstado.setEnabled(estado.jRbtnHabilitar.isSelected() || estado.jRbtnDeshab.isSelected());
 
         if (e.getSource() == estado.jRbtnHabilitar) {
+            
+            //Asignar el estado al textField dependiendo del radio button seleccionado
             estado.jTxtEstado.setText("Activo");
         }
 
         if (e.getSource() == estado.jRbtnDeshab) {
+            
+            //Asignar el estado al textField dependiendo del radio button seleccionado
             estado.jTxtEstado.setText("Inactivo");
         }
         
         if (e.getSource() == estado.jBtnCambiarEstado) {
+            
+            //Metodo para modificar el estado
             modificarEstado();
             estado.dispose();
             admin.setEnabled(true);
@@ -73,12 +82,18 @@ public class ControladorModEstado implements ActionListener {
 
     public void modificarEstado() {
         if (estado.jRbtnHabilitar.isSelected()) {
+            
+            //Si el btn de habilitar esta seleccionado damos el ID de 1
             users.setActivo((byte) 1);
 
         } else if (estado.jRbtnDeshab.isSelected()) {
+            
+            //Si el btn de deshabilitar esta seleccionado damos el ID de 2
             users.setActivo((byte) 2);
 
         }
+        
+        //Damos el parametro de correo para modificar
         users.setCorreo(String.valueOf(estado.jTxtCorreoMod.getText()));
 
         JOptionPane.showMessageDialog(estado, dao.modificarEstado(users), "Información", JOptionPane.INFORMATION_MESSAGE);

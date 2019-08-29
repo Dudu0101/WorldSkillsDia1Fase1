@@ -7,17 +7,17 @@ package interfaces;
 
 import modelo.Usuarios;
 
-/**
- *
- * @author javam2019
- */
 public interface UsuariosInterface {
 
+    //Login
     public Usuarios verificar(String correo, String contrasenia);
     
+    //Agregar
     public String agregarUsuarios(Usuarios users);
 
+    //Modificar estado
     public String modificarEstado(Usuarios users);
 
+    //Modificar Ro
     public String modificarRol(Usuarios users);
 }
